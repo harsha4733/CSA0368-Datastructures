@@ -3,7 +3,7 @@ programs on data structures lab
 #include<stdio.h>
 #include<stdlib.h>
 #include<process.h>
-define SIZE 5
+#define SIZE 5
 
 int top=-1;
 int stk[SIZE];
@@ -23,7 +23,7 @@ int push()
 }
 int pop()
 {   
-    int ele;4444533
+    int ele;
     if(top==-1)
         printf("the stack is empty");
     else
