@@ -1,62 +1,54 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 struct node {
-	int item;
-	struct node* left;
-	struct node* right;
+ int data;
+ struct node* left;
+ struct node* right;
 };
-void inorderTraversal(struct node* root) {
-	if (root == NULL) return;
-	inorderTraversal(root->left);
-	printf("%d\t", root->item);
-	inorderTraversal(root->right);
+struct node* newNode(int data)
+{
+ struct node* node
+  = (struct node*)malloc(sizeof(struct node));
+ node->data = data;
+ node->left = NULL;
+ node->right = NULL;
+ return (node);
 }
-void preorderTraversal(struct node* root) {
-	if (root == NULL) return;
-	printf("%d\t", root->item);
-	preorderTraversal(root->left);
-	preorderTraversal(root->right);
+void printPostorder(struct node* node)
+{
+ if (node == NULL)
+  return;
+ printPostorder(node->left);
+ printPostorder(node->right);
+ printf("%d ", node->data);
 }
-void postorderTraversal(struct node* root) {
-	if (root == NULL) return;
-	postorderTraversal(root->left);
-	postorderTraversal(root->right);
-	printf("%d\t", root->item);
+void printInorder(struct node* node)
+{
+ if (node == NULL)
+  return;
+ printInorder(node->left);
+ printf("%d ", node->data);
+ printInorder(node->right);
 }
-struct node* createNode(value) {
-	struct node* newNode = malloc(sizeof(struct node));
-	newNode->item = value;
-	newNode->left = NULL;
-	newNode->right = NULL;
-
-	return newNode;
+void printPreorder(struct node* node)
+{
+ if (node == NULL)
+  return;
+ printf("%d ", node->data);
+ printPreorder(node->left);
+ printPreorder(node->right);
 }
-struct node* insertLeft(struct node* root, int value) {
-	root->left = createNode(value);
-	return root->left;
-}
-struct node* insertRight(struct node* root, int value) {
-	root->right = createNode(value);
-	return root->right;
-}
-
-int main() {
-	struct node* root = createNode(153);
-	insertLeft(root, 175);
-	insertRight(root, 76);
-
-	insertLeft(root->left, 543);
-	insertRight(root->left, 624);
-	insertLeft(root->left->left,566);
-	insertLeft(root->left->right,65);
-
-	printf("Inorder traversal \n");
-	inorderTraversal(root);
-
-	printf("\nPreorder traversal \n");
-	preorderTraversal(root);
-
-	printf("\nPostorder traversal \n");
-	postorderTraversal(root);
+int main()
+{
+ struct node* root = newNode(1);
+ root->left = newNode(2);
+ root->right = newNode(3);
+ root->left->left = newNode(4);
+ root->left->right = newNode(5);
+ printf("\nPreorder traversal of binary tree is \n");
+ printPreorder(root);
+ printf("\nInorder traversal of binary tree is \n");
+ printInorder(root);
+ printf("\nPostorder traversal of binary tree is \n");
+ printPostorder(root);
 }
